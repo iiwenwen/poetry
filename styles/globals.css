@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+body,
+p {
+  font-family: "LXGW WenKai Screen", "LXGW Heart Serif", sans-serif;
+}
+
+.poetry {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+.image-container {
+  width: 50%;
+  object-fit: cover;
+  /* 防止图片溢出容器 */
+}
