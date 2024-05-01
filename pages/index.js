@@ -16,7 +16,7 @@ export default function Home () {
     isReachingEnd } = getDate(activeTab)
 
   if (error) return <div>error....</div>
-  if (isLoadingMore) return <div>Load....</div>
+
   return (<>
     {
       tabData.map(item => (
@@ -26,7 +26,14 @@ export default function Home () {
         </div >
       ))}
 
-    <button onClick={() => setSize(size + 1)} >Load More</button>
+    <button onClick={() => setSize(size + 1)} >
+      {
+        isLoadingMore
+          ? "Loading..."
+          : isReachingEnd
+            ? "No More"
+            : "Load More"
+      }</button>
   </>
   )
 }
