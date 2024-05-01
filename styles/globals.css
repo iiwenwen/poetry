@@ -33,10 +33,7 @@ p {
   font-family: "LXGW WenKai Screen", "LXGW Heart Serif", sans-serif;
 }
 
-.poetry {
-  writing-mode: vertical-rl;
-  text-orientation: upright;
-}
+
 
 .image-container {
   width: 50%;
