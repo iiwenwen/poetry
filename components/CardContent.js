@@ -9,13 +9,18 @@ marked.setOptions({
   langPrefix: 'language-',
   gfm: true,
 })
-function formatUnixTimestamp (unixTimestamp) {
+function formatdate (date) {
   return useMemo(() => {
-    const date = new Date(unixTimestamp * 1000)
-    const options = { year: 'numeric', month: 'long', day: 'numeric' }
-    const formattedDate = new Intl.DateTimeFormat('zh-CN', options).format(date)
-    return formattedDate.replace(/\//g, '.')
-  }, [unixTimestamp])
+    const newdate = new Date(date);
+
+    // 获取年、月、日
+    const year = newdate.getFullYear(); // 获取年份
+    const month = newdate.getMonth() + 1; // 获取月份，注意月份是从0开始的
+    const day = newdate.getDate(); // 获取日期
+  
+    // 格式化为指定格式
+    return `${year}年${month}月${day}日`;
+  }, [date])
 }
 
 export default React.memo(function CardContent ({ content, date }) {
@@ -36,6 +41,6 @@ export default React.memo(function CardContent ({ content, date }) {
   return (<div className={`card-body lg:w-1/2 ${homeClassName}`}>
     <h2 className="card-title">{activeTab}</h2>
     <div className="card-content" dangerouslySetInnerHTML={{ __html: parsedContent }} />
-    <p>创建于：{formatUnixTimestamp(date)}</p>
+    <p>创建于：{formatdate(date)}</p>
   </div>)
 })

@@ -30,7 +30,8 @@ body {
 
 body,
 p {
-  font-family: "LXGW WenKai Screen", "LXGW Heart Serif", sans-serif;
+  font-family: "LXGW WenKai", sans-serif;
+  font-weight: normal;
 }
 
 

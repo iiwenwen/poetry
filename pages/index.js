@@ -8,7 +8,8 @@ export default function Home () {
   const { activeTab, } = useContext(TabDataContext)
 
 
-  const { tabData,
+  const { 
+    tabData,
     error,
     size,
     setSize,
@@ -20,9 +21,9 @@ export default function Home () {
   return (<>
     {
       tabData.map(item => (
-        <div key={item.id} className="card lg:card-side bg-base-100 shadow-xl">
+        <div key={item.name} className="card lg:card-side bg-base-100 shadow-xl">
           <CardImage />
-          <CardContent content={item.content} date={item.createdTs} />
+          <CardContent content={item.content} date={item.createTime} />
         </div >
       ))}
 
