@@ -27,17 +27,193 @@ body {
   }
 }
 
+/* 绘本风格动画 */
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.8) translateY(20px);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.05) translateY(-5px);
+  }
+
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
 
 body,
 p {
   font-family: "LXGW WenKai", sans-serif;
   font-weight: normal;
+  font-size: 17px;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  position: relative;
+
+  /* 优化中英文混排 */
+  text-autospace: ideograph-alpha ideograph-numeric;
+  -webkit-text-autospace: ideograph-alpha ideograph-numeric;
+}
+
+/* 纸质颗粒纹理效果 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+  background-image:
+    repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px),
+    repeating-linear-gradient(90deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px);
+  background-size: 100% 100%;
+}
+
+/* SVG 噪点纹理 */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.15;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
 }
 
 
 
 .image-container {
-  width: 50%;
+  width: 100%;
+  max-width: 100%;
   object-fit: cover;
-  /* 防止图片溢出容器 */
+  aspect-ratio: 16 / 9;
+}
+
+
+
+
+
+
+
+@layer base {
+  :root {
+    /* OKLCH 色彩系统 - 更现代、感知更均匀 */
+    --background: 0.97 0.01 85;
+    --foreground: 0.25 0.02 260;
+
+    --card: 1 0 0;
+    --card-foreground: 0.25 0.02 260;
+
+    --popover: 1 0 0;
+    --popover-foreground: 0.25 0.02 260;
+
+    --primary: 0.65 0.15 350;
+    --primary-foreground: 1 0 0;
+
+    --secondary: 0.72 0.12 230;
+    --secondary-foreground: 1 0 0;
+
+    --muted: 0.92 0.01 85;
+    --muted-foreground: 0.5 0.02 260;
+
+    --accent: 0.88 0.08 95;
+    --accent-foreground: 0.25 0.02 260;
+
+    --destructive: 0.62 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.9 0.01 260;
+    --input: 0.93 0.01 260;
+    --ring: 0.65 0.15 350;
+
+    /* 绘本特色色彩 - OKLCH */
+    --storybook-pink: 0.75 0.15 350;
+    --storybook-blue: 0.72 0.12 230;
+    --storybook-yellow: 0.85 0.12 95;
+    --storybook-green: 0.68 0.10 150;
+    --storybook-purple: 0.70 0.12 300;
+    --storybook-orange: 0.72 0.15 65;
+
+    --chart-1: 0.68 0.15 350;
+    --chart-2: 0.68 0.12 230;
+    --chart-3: 0.75 0.12 95;
+    --chart-4: 0.65 0.10 150;
+    --chart-5: 0.68 0.12 300;
+
+    --radius: 1.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    /* 纯色背景 - 绘本风格 */
+    background-color: hsl(45, 30%, 96%);
+    /* 优化字体渲染 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.8;
+    /* 添加童趣背景图案 */
+    background-image:
+      /* 云朵 */
+      radial-gradient(ellipse 80px 50px at 20% 10%, rgba(255, 255, 255, 0.6) 0%, transparent 50%),
+      radial-gradient(ellipse 100px 60px at 80% 15%, rgba(255, 255, 255, 0.5) 0%, transparent 50%),
+      radial-gradient(ellipse 70px 40px at 50% 8%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
+      /* 星星 */
+      radial-gradient(circle 3px at 15% 25%, hsl(50, 90%, 70%) 0%, transparent 100%),
+      radial-gradient(circle 2px at 85% 30%, hsl(340, 80%, 75%) 0%, transparent 100%),
+      radial-gradient(circle 2px at 25% 40%, hsl(200, 80%, 75%) 0%, transparent 100%),
+      radial-gradient(circle 3px at 70% 50%, hsl(280, 70%, 75%) 0%, transparent 100%),
+      radial-gradient(circle 2px at 40% 60%, hsl(50, 90%, 70%) 0%, transparent 100%),
+      radial-gradient(circle 2px at 90% 70%, hsl(340, 80%, 75%) 0%, transparent 100%),
+      radial-gradient(circle 3px at 10% 80%, hsl(200, 80%, 75%) 0%, transparent 100%),
+      radial-gradient(circle 2px at 60% 85%, hsl(280, 70%, 75%) 0%, transparent 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
 }
