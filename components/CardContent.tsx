@@ -63,7 +63,7 @@ export default React.memo(function CardContent({ content, date }: CardContentPro
 
   // 绘本主题使用原有样式
   return (
-    <div className="p-8 bg-white/60 backdrop-blur-sm">
+    <div className="p-8 bg-white/75">
       <CardHeader className="p-0 mb-6">
         <CardTitle className="text-2xl font-bold text-foreground/90">
           {activeTab}
