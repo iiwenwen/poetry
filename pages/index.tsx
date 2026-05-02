@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
 import { Card } from '@/components/ui/card'
 import CardContent from '@/components/CardContent'
 import CardImage from '@/components/CardImage'
@@ -9,6 +10,7 @@ import { usePoetryData } from '@/features/poetry'
 import { useTheme } from '@/features/theme'
 
 export default function Home() {
+  const { basePath } = useRouter()
   const { activeTab } = usePoetryContext()
   const { data: tabData, isLoadingMore, isReachingEnd, setSize } = usePoetryData(activeTab)
   const { theme } = useTheme()
@@ -49,7 +51,7 @@ export default function Home() {
                 <div
                   className="ticket-card transition-transform duration-200"
                   style={{
-                    backgroundImage: `url(/poetry/${(index % 8) + 1}.webp)`,
+                    backgroundImage: `url(${basePath}/poetry/${(index % 8) + 1}.webp)`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     contentVisibility: 'auto',

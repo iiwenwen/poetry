@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import type { CardImageProps } from '../types'
 
 // 总共有8张优化后的图片
@@ -6,6 +7,7 @@ const TOTAL_IMAGES = 8
 
 export default function CardImage(props: CardImageProps) {
   const { index = 0 } = props
+  const { basePath } = useRouter()
   const [isInView, setIsInView] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [showImage, setShowImage] = useState(false)
@@ -13,7 +15,7 @@ export default function CardImage(props: CardImageProps) {
 
   // 根据索引循环选择图片 (1-8)
   const imageNumber = (index % TOTAL_IMAGES) + 1
-  const imageUrl = `/poetry/${imageNumber}.webp`
+  const imageUrl = `${basePath}/poetry/${imageNumber}.webp`
 
   // 使用 Intersection Observer 实现懒加载
   useEffect(() => {
